@@ -214,5 +214,17 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# Private recordings, generated outputs and proprietary SDK packages
+*.insv
+*.lrv
+*.insp
+*.mp4
+*.mov
+*.dll
+*.exe
+/models/
+/work/
+/outputs/
+
 # Streamlit
 .streamlit/secrets.toml

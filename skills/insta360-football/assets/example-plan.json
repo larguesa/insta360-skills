@@ -1,0 +1,15 @@
+{
+  "duration": 2,
+  "output_fps": "30",
+  "output_size": [1920, 1080],
+  "yaw_limits": [-30, 30],
+  "pitch": -12,
+  "hfov": 90,
+  "max_speed": 40,
+  "keyframes": [
+    {"t": 0, "yaw": -10},
+    {"t": 0.5, "yaw": -5},
+    {"t": 1, "yaw": 0},
+    {"t": 1.5, "yaw": 5}
+  ]
+}
