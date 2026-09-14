@@ -8,6 +8,14 @@ The first linear run took about 44 minutes including development and debugging. 
 
 The user found little difference in a ten-second SDK denoise comparison. Studio ColorPlus improved colors, while a manual 4K export still looked similar in detail. Do not call this a proven restoration workflow.
 
+## Whole-match evidence
+
+The one-minute approval did not transfer to a full-match run using a different planner. That rejected run used grayscale motion centroids, narrower 75-degree framing and additional smoothing/anticipation; valid output and passing tests did not prevent losing the play. These simultaneous differences do not isolate a single numeric parameter as the cause.
+
+A subsequent semantic play-region workflow completed both periods with neighboring half-second images, overlapping perspective views, broader 90-degree framing and continuous camera motion. The user accepted the result. The agent performed full decoding and sampled still inspection, not a complete continuous visual review. This supports that recipe as a baseline, not precise ball tracking or universal model superiority. See [whole-match workflow](whole-match.md).
+
+A separate subscription-backed vision run remained unfinished. Its orchestration HTTP 500 and process-control terminations were distinct recorded events; their causal relationship was not established. Preserve restartable work and measure all analysis/verification passes before scaling.
+
 ## Regression requirements
 
 Test proportional FOV, strict increasing timestamps, angular bounds, finite numbers, speed limits, held endpoints and nonzero velocity through a sustained pan. Test sendcmd as zero-order hold between commands. Repeated identical absolute rotations should produce identical frames, and a commanded final pose should match a static render.

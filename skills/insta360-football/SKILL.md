@@ -1,7 +1,7 @@
 ---
 name: insta360-football
 description: Use when editing Insta360 football match footage. Produce supervised, smooth rectilinear play-region videos for futsal, small-sided and full-size pitches.
-version: 1.0.0
+version: 1.1.0
 author: Sofia Vicarius
 metadata:
   hermes:
@@ -15,9 +15,13 @@ metadata:
 
 ## Scope
 
-Convert fixed-camera Insta360 recordings into conventional 16:9 match video with original audio. Use the Media SDK for stitching and stabilization, a local vision model or human editor for observations, and deterministic FFmpeg rendering for the virtual camera. This skill covers futsal, society and outdoor football with the same editorial priorities, not identical camera settings.
+Convert fixed-camera Insta360 recordings into conventional 16:9 match video with original audio. Use the Media SDK for stitching and stabilization, an explicitly authorized local or remote vision model, or a human editor, for observations, and deterministic FFmpeg rendering for the virtual camera. This skill covers futsal, society and outdoor football with the same editorial priorities, not identical camera settings.
 
 Do not treat a model response as verified ball tracking. The proven result is approximate play-region framing with user-approved smooth motion. Do not automatically substitute Deep Track: it repeatedly failed on the small, fast ball in the reference footage.
+
+## Whole-match baseline and method boundary
+
+Read [Whole-match semantic reframing](references/whole-match.md) before scaling. Preserve execution method, editorial target and actual model/route independently. Do not substitute SDK rendering for requested Studio GUI editing. Use semantic play-region observations, not the experimental `motion_plan.py` pixel centroid. Approval of a manual sample does not qualify a different automated planner.
 
 ## Workflow and approval gates
 
@@ -26,7 +30,7 @@ Do not treat a model response as verified ball tracking. The proven result is ap
 3. **Calibrate before inference.** Export a full-resolution panorama frame. Compare rectilinear views at several yaw angles and FOVs. Set both FOVs and square pixels. A 90-degree horizontal FOV is a starting candidate, not a universal setting. Confirm horizon, pitch, seams, goals, near and far touchlines, and body proportions. Studio angles may use a different origin/sign.
 4. **Analyze offline every 0.5 seconds initially.** Export selected full-resolution frames, then generate overlapping perspective views. Use neighboring timestamps and explicit view pose. Preserve observations and receipts. Distinguish visible ball, inferred play region and unknown. Enlarge claimed ball locations before accepting them. Same-model crop verification is an additional check, not independent ground truth.
 5. **Approve a camera plan.** Translate only validated evidence into relative clip-time yaw keyframes. Keep pitch/FOV fixed in the initial renderer. During uncertainty, hold a defensible composition or manually choose a wider calibrated FOV; do not manufacture ball coordinates. Reconcile observations across overlapping chunks before rendering. Preserve the approved plan separately from raw model output.
-6. **Export master frames.** Use the original INSV and the correct lens accessory. Keep SDK settings, frame indices, source FPS and export provenance. Run one GPU workload at a time. Start with the dry-run exporter and its bounded frame count; explicitly authorize expensive jobs.
+6. **Export the master.** For long clips, prefer continuous SDK panorama-video export over dense 8K JPEG sequences; selected frames remain appropriate for analysis and short tests. Use the original INSV and the correct lens accessory. Keep SDK settings, frame indices, source FPS and export provenance. Run one GPU workload at a time. Start with the dry-run exporter and its bounded frame count; explicitly authorize expensive jobs.
 7. **Render continuous motion.** Use shared PCHIP-derived tangents with cubic Hermite interpolation, zero endpoint tangents and absolute v360 rotations (`reset_rot=1`). Do not independently ease every half-second interval to zero speed. Retain held final poses. Reject excessive speed rather than silently altering approved keyframes.
 8. **Verify and deliver.** Validate dimensions, square pixels, frame count, duration, full decoding, original source preservation and audio synchronization. Watch fast transitions, reversals, occlusions, seams and both ends of the pitch. Automated checks are necessary, not a replacement for visual approval. Deliver a separately named variant, measured timing and explicit limitations.
 
@@ -47,6 +51,7 @@ Do not claim AI super-resolution: none was found in the inspected desktop SDK. M
 - [Setup and commands](tools/setup.md)
 - [Geometry and observations](references/editorial.md)
 - [Evidence and limitations](references/validation.md)
+- [Whole-match semantic workflow and recovery](references/whole-match.md)
 - [Example plan](assets/example-plan.json)
 - [Observation prompt](assets/observation-prompt.md)
 - `scripts/sdk_export.py`: bounded export and provenance-checked resume.
@@ -64,4 +69,7 @@ Do not claim AI super-resolution: none was found in the inspected desktop SDK. M
 - [ ] Motion, duration, image geometry, audio and full decoding checked.
 - [ ] Every request, retry and verification included in usage accounting where counters exist.
 - [ ] Local inference distinguished from orchestration tokens and subscription billing.
-- [ ] No full-match expansion before short-sample approval.
+- [ ] Same prompt/model/planner as the approved baseline; any replacement revalidated.
+- [ ] First live play, both goal areas, reversal, uncertainty and joins checked in continuous clips for every period.
+- [ ] Resume tested; optional native-project generation cannot block MP4 recovery.
+- [ ] No full-match expansion before representative visual acceptance (internal review when unattended work is authorized).
