@@ -4,6 +4,24 @@ Agent-assisted editing of Insta360 football footage: futsal, small-sided footbal
 
 Start with [the football editing skill](skills/insta360-football/SKILL.md). This is a supervised editorial workflow, not a guaranteed ball tracker or a one-click full-match editor. The reference workflow produced a user-approved, smooth 1080p rectilinear futsal clip. Other pitch types require fresh calibration and sample approval.
 
+## Install with your AI agent
+
+Copy and send this instruction to your agent:
+
+```text
+Install the insta360-football skill from https://github.com/larguesa/insta360-skills. Read its SKILL.md and setup documentation, use the skill installation mechanism supported by your environment, and tell me which prerequisites or permissions are still needed before processing any footage.
+```
+
+You can give this instruction to agents such as **Hermes**, **OpenClaw**, **ChatGPT Desktop**, **Claude Code / Cowork**, or other assistants with access to files and tools. Installation and execution depend on the capabilities and permissions available in your agent; not every app or mode supports installing skills or running local tools.
+
+## The story behind this skill
+
+Read Ricardo Pupo Larguesa's article [Testando os limites da visão artificial](https://aintuicao.scale.press/post/2026/09/27/testando-os-limites-da-visao-artificial) (in Portuguese) for the experiments, limitations and supervised workflow that led to this skill.
+
+## License
+
+This repository is licensed under the [MIT License](LICENSE). Third-party SDKs, models and tools remain subject to their own licenses and terms.
+
 ## SDK downloads and documentation
 
 Download SDK packages through the official developer resources and follow their current access and licensing requirements. No proprietary SDK binaries or models are bundled here.
