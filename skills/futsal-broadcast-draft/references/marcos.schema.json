@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["goals_confirmed"],
+  "properties": {
+    "home_name": {"type": "string"},
+    "away_name": {"type": "string"},
+    "home_color": {"type": "string"},
+    "away_color": {"type": "string"},
+    "goals_confirmed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["final_s", "team"],
+        "properties": {
+          "final_s": {"type": "number", "description": "seconds in concatenated final video"},
+          "team": {"enum": ["home", "away"]},
+          "note": {"type": "string"}
+        }
+      }
+    },
+    "overlay": {
+      "type": "object",
+      "properties": {
+        "home_box": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+        "away_box": {"type": "array", "items": {"type": "number"}, "minItems": 4, "maxItems": 4},
+        "score_delay_s": {"type": "number", "default": 1.5}
+      }
+    }
+  }
+}
