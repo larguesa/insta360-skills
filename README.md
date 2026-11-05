@@ -1,25 +1,24 @@
 # Insta360 Skills
 
-Agent-assisted editing of Insta360 football footage: futsal, small-sided football (society), and full-size outdoor football.
+Agent-assisted editing of Insta360 futsal footage into a YouTube-ready broadcast cut.
 
-Two skills live here:
+## Skill
 
-- **[futsal-broadcast-draft](skills/futsal-broadcast-draft/SKILL.md)** — fixed side-of-court Insta360 futsal → 3-zone broadcast cut, OpenRouter (ZDR) zone labels, PNG scoreboard, YouTube pack. This is the path that produced a full approved Sub14 game (~US$7 labels/game).
-- **[insta360-football](skills/insta360-football/SKILL.md)** — supervised editorial / reframe workflow for football footage (not a guaranteed ball tracker). Other pitch types need fresh calibration and sample approval.
+- **[futsal-broadcast-draft](skills/futsal-broadcast-draft/SKILL.md)** — fixed side-of-court Insta360 futsal → 3-zone broadcast cut, OpenRouter (ZDR) zone labels, PNG scoreboard, YouTube pack. This is the path that produced a full approved Sub14 game (~US labels/game).
 
 ## Install with your AI agent
 
 Copy and send this instruction to your agent:
 
-```text
-Install the insta360-football skill from https://github.com/larguesa/insta360-skills. Read its SKILL.md and setup documentation, use the skill installation mechanism supported by your environment, and tell me which prerequisites or permissions are still needed before processing any footage.
-```
+`	ext
+Install the futsal-broadcast-draft skill from https://github.com/larguesa/insta360-skills. Read its SKILL.md, use the skill installation mechanism supported by your environment, and tell me which prerequisites or permissions are still needed before processing any footage.
+`
 
 You can give this instruction to agents such as **Hermes**, **OpenClaw**, **ChatGPT Desktop**, **Claude Code / Cowork**, or other assistants with access to files and tools. Installation and execution depend on the capabilities and permissions available in your agent; not every app or mode supports installing skills or running local tools.
 
 ## The story behind this skill
 
-Read Ricardo Pupo Larguesa's article [Testando os limites da visão artificial](https://aintuicao.scale.press/post/2026/09/27/testando-os-limites-da-visao-artificial) (in Portuguese) for the experiments, limitations and supervised workflow that led to this skill.
+Read Ricardo Pupo Larguesa's article [Testando os limites da visão artificial](https://aintuicao.scale.press/post/2026/09/27/testando-os-limites-da-visao-artificial) (in Portuguese) for the experiments, limitations and supervised workflow that led to this work.
 
 ## License
 
@@ -36,28 +35,19 @@ Download SDK packages through the official developer resources and follow their 
 - [Canonical Media SDK documentation source](https://github.com/Insta360Develop/Insta360-Developer_Docs/blob/main/docs/en/sdk/x-ace-go/desktop/media.md)
 - [OSC camera-control API](https://github.com/Insta360Develop/Insta360_OSC)
 - [FFmpeg download](https://ffmpeg.org/download.html) and [v360 documentation](https://ffmpeg.org/ffmpeg-filters.html#v360)
-- [LM Studio](https://lmstudio.ai/), optional local vision backend
 
 The Windows reference used Media SDK 3.1.5. Inspect the installed headers, example/main.cc and executable help before using a different version. Camera control and OSC are not required for editing existing recordings.
 
 ## Layout
 
-- `skills/futsal-broadcast-draft/`: futsal broadcast pipeline (SKILL.md + scripts + references).
-- `skills/insta360-football/`: football editorial skill (SKILL.md, references, assets, scripts, tools).
+- skills/futsal-broadcast-draft/: futsal broadcast pipeline (SKILL.md + scripts + references).
 
 Keep originals, generated frames, faces, model responses, credentials and proprietary SDK files outside this repository.
 
 ## Getting started
 
-Use an existing Python environment with NumPy, OpenCV, SciPy and Pillow, or create a separate virtual environment. Keep FFmpeg and ffprobe on PATH (NVENC/NVDEC recommended for the futsal broadcast skill).
+Use an existing Python environment with NumPy, OpenCV and Pillow, or create a separate virtual environment. Keep FFmpeg and ffprobe on PATH (NVENC/NVDEC recommended).
 
-**Futsal broadcast:** read [skills/futsal-broadcast-draft/SKILL.md](skills/futsal-broadcast-draft/SKILL.md). OpenRouter key via `--key-file` only; never commit keys or game `work\` folders.
-
-**Football editorial:** read [tools/setup.md](skills/insta360-football/tools/setup.md) before executing anything.
-
-```bash
-python -m unittest discover -s skills/insta360-football/scripts -p "test_*.py" -v
-python skills/insta360-football/scripts/reframe.py --plan skills/insta360-football/assets/example-plan.json --check
-```
+Read [skills/futsal-broadcast-draft/SKILL.md](skills/futsal-broadcast-draft/SKILL.md). OpenRouter key via --key-file only; never commit keys or game work\ folders.
 
 All repository documentation, prompts, comments and user-facing script output are in English. Nothing uploads recordings automatically. Review each short sample before authorizing longer processing.

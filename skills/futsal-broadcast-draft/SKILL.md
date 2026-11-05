@@ -5,7 +5,7 @@ description: >-
   broadcast cut: 3 locked zones, LLM zone labels (OpenRouter ZDR), lookahead
   reframe, scoreboard PNG overlay, and a publish pack. Use when the user asks
   to reframe/broadcast/edit a futsal Insta360 game, not for outdoor football
-  (see insta360-football) and not for ball tracking.
+  and not for ball tracking.
 ---
 
 # Futsal broadcast (draft → YouTube)
